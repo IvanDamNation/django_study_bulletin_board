@@ -1,27 +1,28 @@
 # django_study_seventh
 
-My seventh practice project in Django and HTML
+My another practice project in Django and HTML
 
 
-This is simple (actually, it's kinda complex for me) project on Django.
+This is typical project on Django.
 
 
-Just made project work with celery-redis-docker stack
+Features:
+1) Some kind of game portal with posts from authorized users;
+2) 
 
+Requirements: in requirements.txt file (in work)
 
-Requirements: properly installed docker on your machine
-
+""" properly installed docker on your machine
 
 
 For starting server use command in project root directory:
 *docker-compose up*
 
 
+After properly started cluster of three containers (Django, Redis and Celery) you can access project web-interface on localhost address with standard port 8000 (127.0.0.1:8000). """ (When docker will be ready)
 
-After properly started cluster of three containers (Django, Redis and Celery) you can access project web-interface on localhost address with standard port 8000 (127.0.0.1:8000).
 
-
-Made for seventh practice exercise in chapter "Django and backend" for SkillFactory
+Made for final practice exercise in chapter "Django and backend" for SkillFactory
 
 Superuser:
 
