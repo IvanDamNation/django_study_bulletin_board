@@ -4,8 +4,13 @@ from django.urls import path
 from .views import NewsFeed, NewsByCategory, ViewNews, CreateNews
 
 
-# TODO
 urlpatterns = [
-    path('', NewsFeed.as_view(), name='home'),
+    path('',
+         NewsFeed.as_view(),
+         name='home'),
+    path('category/<int:category_id>/',
+         NewsByCategory.as_view(),
+         name='category'),
+
 
 ]

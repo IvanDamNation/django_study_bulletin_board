@@ -4,7 +4,6 @@ from django.views.generic import ListView, DetailView, CreateView
 from .models import News, Category
 
 
-# TODO
 class NewsFeed(ListView):
     model = News
     template_name = 'news/home_news_list.html'
@@ -15,10 +14,23 @@ class NewsFeed(ListView):
         context['title'] = 'Main page'
         return context
 
+    def get_queryset(self):
+        return News.objects.filter(is_published=True)
 
-# TODO
+
 class NewsByCategory(ListView):
-    pass
+    model = News
+    template_name = 'news/home_news_list.html'
+    allow_empty = False
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
+        return context
+
+    def get_queryset(self):
+        return News.objects.filter(category_id=self.kwargs['category_id'],
+                                   is_published=True)
 
 
 # TODO
