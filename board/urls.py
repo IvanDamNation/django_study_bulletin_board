@@ -11,6 +11,11 @@ urlpatterns = [
     path('category/<int:category_id>/',
          NewsByCategory.as_view(),
          name='category'),
-
+    path('<int:pk>/',
+         ViewNews.as_view(),
+         name='view_news'),
+    # path('add-news/',
+    #      CreateNews.as_view(),
+    #      name='add_news'),
 
 ]

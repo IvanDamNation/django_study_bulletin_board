@@ -33,9 +33,9 @@ class NewsByCategory(ListView):
                                    is_published=True)
 
 
-# TODO
 class ViewNews(DetailView):
-    pass
+    model = News
+    context_object_name = 'news_item'
 
 
 # TODO

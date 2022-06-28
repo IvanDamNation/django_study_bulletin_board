@@ -11,11 +11,11 @@ class News(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Published?')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Category')
 
-    # def get_absolute_url(self):
-    #     pass
+    def get_absolute_url(self):
+        return reverse('view_news', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.title
+        return '{}'.format(self.title)
 
     class Meta:
         verbose_name = 'News'
@@ -26,11 +26,11 @@ class News(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=128, db_index=True, verbose_name='Category')
 
-    # def get_absolute_url(self):
-    #     return reverse('category', kwargs={'category_id': self.pk})
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'category_id': self.pk})
 
     def __str__(self):
-        return self.title
+        return '{}'.format(self.title)
 
     class Meta:
         verbose_name = 'Category'
