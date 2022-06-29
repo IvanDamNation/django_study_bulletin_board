@@ -14,8 +14,8 @@ urlpatterns = [
     path('<int:pk>/',
          ViewNews.as_view(),
          name='view_news'),
-    # path('add-news/',
-    #      CreateNews.as_view(),
-    #      name='add_news'),
+    path('add-news/',
+         CreateNews.as_view(),
+         name='add_news'),
 
 ]

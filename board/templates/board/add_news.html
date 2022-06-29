@@ -49,18 +49,6 @@ Add news :: {{ block.super }}
         </div>
     </div>
 
-    {% comment %}
-    {% for field in form %}
-    <div class="form-group">
-        {{ field.label_tag }}
-        {{ field }}
-        <div class="invalid-feedback">
-            {{ field.errors }}
-        </div>
-    </div>
-    {% endfor %}
-    {% endcomment %}
-
 
     <button type="submit" class="btn btn-primary btn-block">Add news</button>
 </form>

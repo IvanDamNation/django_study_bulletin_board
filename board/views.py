@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 
+from .forms import NewsForm
 from .models import News, Category
 
 
@@ -38,6 +39,6 @@ class ViewNews(DetailView):
     context_object_name = 'news_item'
 
 
-# TODO
 class CreateNews(CreateView):
-    pass
+    form_class = NewsForm
+    template_name = 'board/add_news.html'
