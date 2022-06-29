@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'board.apps.BoardConfig',
+    'usersaccounts.apps.UsersaccountsConfig',
 ]
 
 SITE_ID = 1
@@ -137,10 +138,18 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Login and account options
+
+AUTH_USER_MODEL = 'usersaccounts.User'
+
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+
+
+
+# Logging option
 
 # LOGGING = log_configuration

@@ -18,8 +18,10 @@
         <div class="media">
             {% if item.photo %}
             <img src="{{ item.photo.url }}" alt="" width="350" class="mr-3">
+            {% comment %}
             {% else %}
             <img src="https://picsum.photos/id/1060/350/235/?blur=2" alt="" class="mr-3">
+            {% endcomment %}
             {% endif %}
             <div class="media-body">
                 <h5 class="card-title">{{ item.title }}</h5>
