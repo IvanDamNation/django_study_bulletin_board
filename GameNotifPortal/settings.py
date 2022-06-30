@@ -149,7 +149,6 @@ ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 
 
-
 # Logging option
 
 # LOGGING = log_configuration
