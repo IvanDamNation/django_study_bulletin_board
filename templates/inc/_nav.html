@@ -18,6 +18,9 @@
             </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a class="nav-link ms" href="#">User: {{ user }}</a>
+            </li>
             {% if user.is_authenticated %}
             <li>
                 <a class="nav-link ms" href="{% url 'logout' %}">Log out</a>

@@ -3,6 +3,7 @@ import string
 import random
 from django.db import models
 from django.utils import timezone  # Use only timezone with django
+from django.utils.translation import gettext_lazy as _
 
 from GameNotifPortal.const import EXP_TIME_CODE
 
@@ -19,7 +20,10 @@ from GameNotifPortal.const import EXP_TIME_CODE
 
 
 class User(AbstractUser):
-    pass
+    email = models.EmailField(_('email_adress'), unique=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
 #     # TODO create relation with code model
 #     code_auth = models.OneToOneField(CodeAuth, on_delete=models.CASCADE)
 #     # Add is activate flag for user
