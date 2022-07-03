@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 
 from GameNotifPortal.logging_config import log_configuration
-from keys import DJANGO_KEY
+from keys import DJANGO_KEY, MAIL_USER, MAIL_PASSWORD, SMTP_SERVER, MAIL_SERVICE
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -148,8 +148,27 @@ LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 
+# Email options
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+EMAIL_HOST = SMTP_SERVER
+EMAIL_PORT = 465
+EMAIL_HOST_USER = MAIL_USER
+EMAIL_HOST_PASSWORD = MAIL_PASSWORD
+EMAIL_USE_SSL = True
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + MAIL_SERVICE
+
+# Celery options
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Moscow'
+CELERY_TASK_TIME_LIMIT = 30 * 60
 
 # Logging option
 

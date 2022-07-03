@@ -20,7 +20,7 @@ Features:
 
 Requirements: 
 1) In requirements.txt file (Docker install everything automatically)(in work);
-2) Create file "keys.py" with parameter DJANGO_KEY (put your own premade Django token in it)
+2) Create file "keys.py" with parameter DJANGO_KEY (put your own pre-made Django token in it)
 3) Create file ".env" in root project directory with parameters:
 - DJANGO_PORT=*port number*
 - DOCKER_EXPOSE_PORT=*port number*
