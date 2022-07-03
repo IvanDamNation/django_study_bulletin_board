@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <p>Your url is not valid. Please, try to log in again</p>
+        <a href="{% url 'login' %}">Try again</a>
+    </div>
+{% endblock %}

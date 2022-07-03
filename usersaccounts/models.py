@@ -26,5 +26,5 @@ class User(AbstractUser):
 
 #     # TODO create relation with code model
 #     code_auth = models.OneToOneField(CodeAuth, on_delete=models.CASCADE)
-#     # Add is activate flag for user
-#     is_activated = models.BooleanField(default=False)
+    # Add is activate flag for user
+    is_activated = models.BooleanField(default=False)
