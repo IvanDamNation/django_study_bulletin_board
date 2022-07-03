@@ -16,4 +16,3 @@ class UserAdmin(UserAdmin):
         }),
     )
     add_form = UserCreationForm
-

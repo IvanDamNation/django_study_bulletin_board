@@ -8,16 +8,23 @@ This is typical project on Django.
 
 Features:
 1) Some kind of game portal with posts from authorized users (with Bootstrap already-in);
-2) Created category with at least 1 news will be added in sidebar automatically (with counter of amount of news);
-3) Reworked auth: unique and required email for each account;
-4) Account verification via email (in work);
-5) Personal page for each account (in work);
-6) Commentary for each news (in work);
-7) Comment shows up after author accept (in work);
-8) Email notification for author about new comment (in work);
-9) Weekly user notification about some news on portal (in work).
+2) Custom logging (need to uncomment LOGGING option in settings.py)
+3) Created category with at least 1 news will be added in sidebar automatically (with counter of amount of news);
+4) Reworked auth: unique and required email for each account;
+5) Account verification via email;
+6) Personal page for each account (in work);
+7) Commentary for each news (in work);
+8) Comment shows up after author accept (in work);
+9) Email notification for author about new comment (in work);
+10) Weekly user notification about some news on portal (in work).
 
-Requirements: in requirements.txt file (in work)
+Requirements: 
+1) In requirements.txt file (Docker install everything automatically)(in work);
+2) Create file "keys.py" with parameter DJANGO_KEY (put your own premade Django token in it)
+3) Create file ".env" in root project directory with parameters:
+- DJANGO_PORT=*port number*
+- DOCKER_EXPOSE_PORT=*port number*
+- DJANGO_ALLOWED_HOSTS=*host list* (f.e. "127.0.0.1")
 
 ~~properly installed docker on your machine
 For starting server use command in project root directory:

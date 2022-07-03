@@ -1,0 +1,60 @@
+version: "3.10"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django
+    command: python manage.py runserver 0.0.0.0:${DJANGO_PORT}
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "127.0.0.1:${DOCKER_EXPOSE_PORT}:${DJANGO_PORT}"
+    env_file:
+      - .env
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      my_new_net:
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A NewsPaper worker -l INFO -B
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - django
+      - redis
+    networks:
+      my_new_net:
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: celery:3.1
+    command: celery -A NewsPaper worker -l INFO
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/
+    depends_on:
+      - redis
+    restart: always
+    env_file:
+      - .env
+    networks:
+      my_new_net:
+  redis:
+    image: "redis:alpine"
+    networks:
+      my_new_net:
+
+networks:
+  my_new_net:
