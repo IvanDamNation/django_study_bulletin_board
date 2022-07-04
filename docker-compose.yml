@@ -24,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: celery -A NewsPaper worker -l INFO -B
+    command: celery -A GameNotifPortal worker -l INFO -B
     environment:
       CELERY_BROKER_URL: redis://redis:6379/
     env_file:
@@ -41,7 +41,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: celery:3.1
-    command: celery -A NewsPaper worker -l INFO
+    command: celery -A GameNotifPortal worker -l INFO
     environment:
       CELERY_BROKER_URL: redis://redis:6379/
     depends_on:

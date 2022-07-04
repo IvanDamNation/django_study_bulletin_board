@@ -36,12 +36,23 @@ class News(models.Model):
         ordering = ['-created_at', 'title']
 
 
-# # TODO
-# class Comment(models.Model):
-#     text = models.TextField()
-#     news = models.ForeignKey(News, on_delete=models.CASCADE)
-#     sender = models.ForeignKey(User, on_delete=models.CASCADE)
-#     accept = models.BooleanField(default=False)
+class Comment(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE, verbose_name='News', related_name='comment_news')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Comment author')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Commentary date')
+    text = models.TextField(verbose_name='Commentary text')
+    accept = models.BooleanField(default=False, verbose_name='Accepted?')
+
+    def get_absolute_url(self):
+        return reverse('comment', kwargs={'comment_id': self.pk})
+
+    def __str__(self):
+        return '{}'.format(self.text)
+
+    class Meta:
+        verbose_name = 'Commentary'
+        verbose_name_plural = 'Commentaries'
+        ordering = ['-created_at', 'news']
 
 
 class Category(models.Model):

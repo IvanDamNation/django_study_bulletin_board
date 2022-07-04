@@ -2,12 +2,12 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 
 from .forms import NewsForm
-from .models import News, Category
+from .models import News, Category, Comment
 
 
 class NewsFeed(ListView):
     model = News
-    template_name = 'news/home_news_list.html'
+    template_name = 'board/home_news_list.html'
     context_object_name = 'news'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -21,7 +21,7 @@ class NewsFeed(ListView):
 
 class NewsByCategory(ListView):
     model = News
-    template_name = 'news/home_news_list.html'
+    template_name = 'board/home_news_list.html'
     allow_empty = False
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -42,3 +42,18 @@ class ViewNews(DetailView):
 class CreateNews(CreateView):
     form_class = NewsForm
     template_name = 'board/add_news.html'
+
+
+class CommentList(ListView):
+    model = Comment
+    template_name = 'board/comments_list.html'
+    context_object_name = 'commentaries'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['title'] = Comment.objects.filter(news_id=self.kwargs['news_id'])
+        return context
+
+    def get_queryset(self):
+        return Comment.objects.filter(accept=True)
+

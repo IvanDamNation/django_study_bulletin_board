@@ -3,7 +3,7 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import News
+from .models import News, Comment
 
 
 class NewsForm(forms.ModelForm):
@@ -22,3 +22,15 @@ class NewsForm(forms.ModelForm):
         if re.match(r'\d', title):
             raise ValidationError("Title mustn't start with a number")
         return title
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ('accept', )
+        fields = ['text']
+        widgets = {'news': forms.HiddenInput}
+
+    def clean_text(self):
+        text = self.cleaned_data['text']
+        return text

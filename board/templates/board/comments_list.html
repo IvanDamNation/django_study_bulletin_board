@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ news_item.title }} :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<div>
+    Commentaries:
+    {% for item in commentaries %}
+    <div class="card mb-3">
+        <h5 class="card-title">{{ item.sender.username }}</h5>
+        <p class="card-text">{{ item.text }}</p>
+    </div>
+    {% empty %}
+    No commentaries yet
+    {% endfor %}
+</div>
+{% endblock %}
