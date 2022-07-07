@@ -1,7 +1,6 @@
 from django.urls import path
 
-from .views import NewsFeed, NewsByCategory, ViewNews, CreateNews, CommentList
-
+from .views import NewsFeed, NewsByCategory, ViewNews, CreateNews, CommentList, CreateComment
 
 urlpatterns = [
     path('',
@@ -19,5 +18,7 @@ urlpatterns = [
     path('<int:pk>/commentaries/',
          CommentList.as_view(),
          name='view_comments'),
-
+    path('new_comment/',
+         CreateComment.as_view(),
+         name='add_comment'),
 ]

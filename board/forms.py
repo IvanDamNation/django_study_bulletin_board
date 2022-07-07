@@ -27,9 +27,10 @@ class NewsForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ('accept', )
         fields = ['text']
-        widgets = {'news': forms.HiddenInput}
+        widgets = {
+            'text': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
     def clean_text(self):
         text = self.cleaned_data['text']

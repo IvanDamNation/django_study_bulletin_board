@@ -13,14 +13,14 @@ Features:
 4) Reworked auth: unique and required email for each account;
 5) Account verification via email;
 6) Personal page for each account (in work);
-7) Commentary for each news (in work);
+7) Commentary for each news;
 8) Comment shows up after author accept (in work);
 9) Email notification for author about new comment (in work);
 10) Weekly user notification about some news on portal (in work).
 
 Requirements: 
 1) In requirements.txt file (Docker install everything automatically)(in work);
-2) Create file "keys.py" with parameter DJANGO_KEY (put your own pre-made Django token in it)
+2) Create file "keys.py" in root project directory with parameter DJANGO_KEY (put your own pre-made Django token in it)
 3) Create file ".env" in root project directory with parameters:
 - DJANGO_PORT=*port number*
 - DOCKER_EXPOSE_PORT=*port number*

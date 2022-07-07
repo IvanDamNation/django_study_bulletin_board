@@ -1,7 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic.edit import FormMixin
 
-from .forms import NewsForm
+
+from .forms import NewsForm, CommentForm
 from .models import News, Category, Comment
 
 
@@ -34,9 +38,28 @@ class NewsByCategory(ListView):
                                    is_published=True)
 
 
-class ViewNews(DetailView):
+class ViewNews(FormMixin, DetailView):
     model = News
     context_object_name = 'news_item'
+    form_class = CommentForm
+    success_msg = 'Comment sent to author, wait for accept'
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('view_news', kwargs={'pk': self.get_object().id})
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.news = self.get_object()
+        self.object.sender = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class CreateNews(CreateView):
@@ -51,7 +74,7 @@ class CommentList(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['com_list'] = Comment.objects.filter(news__pk=self.kwargs.get('pk'))
+        context['news_pk'] = self.kwargs.get('pk')
         return context
 
     def get_queryset(self):
