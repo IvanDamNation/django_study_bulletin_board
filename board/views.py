@@ -1,8 +1,8 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.views.generic.edit import FormMixin
 
 
 from .forms import NewsForm, CommentForm
@@ -26,6 +26,7 @@ class NewsFeed(ListView):
 class NewsByCategory(ListView):
     model = News
     template_name = 'news/news_detail.html'
+    paginate_by = 10
     allow_empty = False
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -38,28 +39,12 @@ class NewsByCategory(ListView):
                                    is_published=True)
 
 
-class ViewNews(FormMixin, DetailView):
+class ViewNews(DetailView):
     model = News
     context_object_name = 'news_item'
-    form_class = CommentForm
-    success_msg = 'Comment sent to author, wait for accept'
 
     def get_success_url(self, **kwargs):
         return reverse_lazy('view_news', kwargs={'pk': self.get_object().id})
-
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.news = self.get_object()
-        self.object.sender = self.request.user
-        self.object.save()
-        return super().form_valid(form)
 
 
 class CreateNews(CreateView):
@@ -71,11 +56,27 @@ class CommentList(ListView):
     model = Comment
     template_name = 'board/comments_list.html'
     context_object_name = 'commentaries'
+    paginate_by = 20
+    form_class = CommentForm
+    success_msg = 'Comment was sent to author, wait for accept'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['news_pk'] = self.kwargs.get('pk')
+        context['form'] = CommentForm
         return context
+
+    def post(self, request, *args, **kwargs):
+        news_pk = self.kwargs.get('pk')
+        news = News.objects.get(pk=news_pk)
+        sender = self.request.user
+        text = request.POST['text']
+        comment = Comment(news=news, sender=sender, text=text)
+
+        if CommentForm.is_valid:
+            messages.success(request, self.success_msg)
+            comment.save()
+
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         return Comment.objects.filter(news__pk=self.kwargs.get('pk'), accept=True)
