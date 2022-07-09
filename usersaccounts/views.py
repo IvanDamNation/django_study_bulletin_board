@@ -69,3 +69,10 @@ class Register(View):
             'form': form
         }
         return render(request, self.template_name, context)
+
+
+def personal_page_view(request):
+    context = {
+        'user': request.user
+    }
+    return render(request, 'usersaccounts/personal_page.html', context)

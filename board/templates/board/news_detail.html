@@ -14,10 +14,8 @@
         Category: <a href="{{ news_item.category.get_absolute_url }}">{{ news_item.category }}</a>
     </div>
     <div class="card-body">
-            {% if object.photo %}
-            <img src="{{ news_item.photo.url }}" alt="" width="350" class="float-left mr-3">
-        {% else %}
-        <img src="https://picsum.photos/id/1060/350/235/?blur=2" alt="" class="float-left mr-3">
+        {% if object.photo %}
+        <img src="{{ news_item.photo.url }}" alt="" width="350" class="float-left mr-3">
         {% endif %}
 
         <h5 class="card-title">{{ news_item.title }}</h5>

@@ -12,21 +12,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}">Mainpage</a>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'add_news' %}">Add news</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a class="nav-link ms" href="#">User: {{ user }}</a>
-            </li>
             {% if user.is_authenticated %}
+            <li>
+                <a class="nav-link ms" href="{% url 'profile' %}">User: {{ user }}</a>
+            </li>
             <li>
                 <a class="nav-link ms" href="{% url 'logout' %}">Log out</a>
             </li>
             <li>
-                <a class="nav-link ms" href="#">Your page</a>
+                <a class="nav-link ms" href="{% url 'profile' %}">Your page</a>
             </li>
             {% else %}
             <li>

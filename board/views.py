@@ -1,9 +1,6 @@
 from django.contrib import messages
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-
 
 from .forms import NewsForm, CommentForm
 from .models import News, Category, Comment
@@ -62,7 +59,7 @@ class CommentList(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = CommentForm
+        context['form'] = self.form_class
         return context
 
     def post(self, request, *args, **kwargs):

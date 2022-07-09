@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from .views import Register, EmailVerify, MyLoginView
+from .views import Register, EmailVerify, MyLoginView, personal_page_view
 
 urlpatterns = [
     path('login/', MyLoginView.as_view(), name='login'),
@@ -19,4 +19,7 @@ urlpatterns = [
     path('register/',
          Register.as_view(),
          name='register'),
+    path('profile/',
+         personal_page_view,
+         name='profile'),
 ]

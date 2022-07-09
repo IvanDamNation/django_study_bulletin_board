@@ -20,7 +20,7 @@
     {{ message }}
     {% endfor %}
 </ul>
-{% endif %}
+    {% endif %}
 
     <div class="col-4">
         <form action="" id="add_form" method="post">
@@ -31,17 +31,17 @@
     </div>
 </div>
 
-    <h4>Commentaries:</h4>
-    <div class="card mb-3">
-        {% for item in commentaries %}
-        <div>
-            <h5 class="card-title">{{ item.sender.username }}</h5>
-            <p class="card-text">{{ item.text }}</p>
-            <p class="card-footer text-muted">{{ item.created_at|date:"Y-m-d H:i:s" }}</p>
-        </div>
-        {% empty %}
-        <h5>No commentaries yet</h5>
-        {% endfor %}
+<h4>Commentaries:</h4>
+<div class="card mb-3">
+    {% for item in commentaries %}
+    <div>
+        <h5 class="card-title">{{ item.sender.username }}</h5>
+        <p class="card-text">{{ item.text }}</p>
+        <p class="card-footer text-muted">{{ item.created_at|date:"Y-m-d H:i:s" }}</p>
     </div>
+    {% empty %}
+    <h5>No commentaries yet</h5>
+    {% endfor %}
+</div>
 
 {% endblock %}

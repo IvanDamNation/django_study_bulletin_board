@@ -16,3 +16,5 @@ class UserAdmin(UserAdmin):
         }),
     )
     add_form = UserCreationForm
+    list_display = ('id', 'username', 'email', 'is_activated', 'is_staff')
+    list_editable = ('is_activated', )
