@@ -44,6 +44,13 @@ Add news :: {{ block.super }}
             {{ form.category.errors }}
         </div>
     </div>
+        <div class="form-group">
+        <label for="{{ form.category.id_for_label }}" class="form-label">Photo:</label>
+        {{ form.photo }}
+        <div class="invalid-feedback">
+            {{ form.category.errors }}
+        </div>
+    </div>
 
     <button type="submit" class="btn btn-primary btn-block">Add news</button>
 </form>

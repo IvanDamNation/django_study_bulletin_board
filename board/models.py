@@ -4,10 +4,6 @@ from django.urls import reverse
 from usersaccounts.models import User
 
 
-class Files(models.Model):
-    file = models.FileField()
-
-
 class News(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Author')
     title = models.CharField(max_length=128, verbose_name='Title')
