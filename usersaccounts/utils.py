@@ -33,8 +33,8 @@ def send_email_for_verify(request, user):
 
 def send_to_sender(user_email):
     send_mail(
-        'Your news got new comment',
-        'Check it on your account on portal and accept or delete it',
+        'Your comment was accepted',
+        'Author accepted your commentary for publish!',
         DEFAULT_FROM_EMAIL,
         [user_email],
         fail_silently=False,
