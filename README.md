@@ -1,4 +1,4 @@
-# django_study_seventh
+# GameNotifPortal
 
 My another practice project in Django and HTML
 
