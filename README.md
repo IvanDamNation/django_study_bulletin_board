@@ -12,7 +12,7 @@ Features:
 3) Created category with at least 1 news will be added in sidebar automatically (with counter of amount of news);
 4) Reworked auth: unique and required email for each account;
 5) Account verification via email;
-6) Personal page for each account (in work);
+6) Personal page for each account;
 7) Commentary for each news;
 8) Comment shows up after author accept (in work);
 9) Email notification for author about new comment (in work);

@@ -1,11 +1,15 @@
 from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.contrib.auth.tokens import default_token_generator as token_generator
+from django.views.generic import ListView
 
+from board.models import Comment, News
+from usersaccounts.filters import CommentFilter
 from usersaccounts.forms import UserCreationForm, AuthenticationForm
 from usersaccounts.utils import send_email_for_verify
 
@@ -71,8 +75,51 @@ class Register(View):
         return render(request, self.template_name, context)
 
 
+class CommentForAcceptList(ListView):
+    model = Comment
+    template_name = 'usersaccounts/acceptation_list.html'
+    context_object_name = 'commentaries'
+    paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = CommentFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = request.POST
+        print(request.POST)
+        if form.is_valid:
+            obj = form.save(commit=False)
+            obj.accept = True
+            obj.save()
+
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Comment.objects.filter(news__author=self.request.user,
+                                      accept=False)
+
+
 def personal_page_view(request):
     context = {
         'user': request.user
     }
     return render(request, 'usersaccounts/personal_page.html', context)
+
+
+@login_required
+def accept_commentary(request, pk):
+    commentary = Comment.objects.get(pk=pk)
+    commentary.accept = True
+    commentary.save()
+
+    return redirect('acceptation_list')
+
+
+@login_required
+def delete_commentary(request, pk):
+    commentary = Comment.objects.get(pk=pk)
+    commentary.delete()
+
+    return redirect('acceptation_list')

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<form method="GET" class="form-label" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    {{ filter.form }}
+    <input class="btn btn-primary" type="submit" value="Find">
+</form>
+<h4>Commentaries:</h4>
+<div class="card mb-3">
+    {% for item in filter.qs %}
+    <form id="comment_unaccepted">
+        <h5 class="card-title">{{ item.sender.username }}</h5>
+        <p class="card-text">{{ item.text }}</p>
+        <p class="card-footer text-muted">{{ item.created_at|date:"Y-m-d H:i:s" }}</p>
+        {% csrf_token %}
+        <a href="{% url 'comment_accept' item.pk %}" class="btn btn-primary">Accept this comment</a>
+        <a href="{% url 'comment_delete' item.pk %}" class="btn btn-danger">Delete this comment</a>
+
+    </form>
+    {% empty %}
+    <h5>No commentaries yet</h5>
+    {% endfor %}
+
+</div>
+{% endblock %}

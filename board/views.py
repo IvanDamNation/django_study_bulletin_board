@@ -48,6 +48,16 @@ class CreateNews(CreateView):
     form_class = NewsForm
     template_name = 'board/add_news.html'
 
+    def post(self, request, *args, **kwargs):
+        form = NewsForm(request.POST or None)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.author = self.request.user
+            obj.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
 
 class CommentList(ListView):
     model = Comment

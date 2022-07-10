@@ -13,6 +13,7 @@ class Files(models.Model):  # TODO Don't forget add MEDIA_URL and MEDIA_ROOT
 
 
 class News(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Author')
     title = models.CharField(max_length=128, verbose_name='Title')
     content = models.TextField(verbose_name='Content')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Published')

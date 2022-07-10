@@ -1,7 +1,9 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from .views import Register, EmailVerify, MyLoginView, personal_page_view
+from .views import Register, EmailVerify, MyLoginView, \
+    CommentForAcceptList, personal_page_view, accept_commentary, \
+    delete_commentary
 
 urlpatterns = [
     path('login/', MyLoginView.as_view(), name='login'),
@@ -22,4 +24,13 @@ urlpatterns = [
     path('profile/',
          personal_page_view,
          name='profile'),
+    path('profile/acceptation_list/',
+         CommentForAcceptList.as_view(),
+         name='acceptation_list'),
+    path('<int:pk>/accept/',
+         accept_commentary,
+         name='comment_accept'),
+    path('<int:pk>/delete/',
+         delete_commentary,
+         name='comment_delete')
 ]

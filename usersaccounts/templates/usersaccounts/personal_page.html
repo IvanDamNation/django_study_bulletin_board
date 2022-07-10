@@ -29,15 +29,16 @@
     </table>
     <br>
 </div>
-<button>
-    <a href="{% url 'logout' %}">Log out</a>
-</button>
+
+<a href="{% url 'acceptation_list' %}" class="btn btn-primary">View unaccepted comments</a>
+<a href="{% url 'logout' %}" class="btn btn-primary">Log out</a>
+
 
 {% else %}
 
 <h2>Not allowed for Anonymous user. Authenticate first</h2>
 
-<button class="btn btn-primary" href="{% url 'login' %}">Log in</button>
+<a href="{% url 'login' %}" class="btn btn-primary">Log in</a>
 {% endif %}
 
 {% endblock %}
