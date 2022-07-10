@@ -14,7 +14,7 @@ Features:
 5) Account verification via email;
 6) Personal page for each account;
 7) Commentary for each news;
-8) Comment shows up after author accept (in work);
+8) Comment shows up after author accept;
 9) Email notification for author about new comment (in work);
 10) Weekly user notification about some news on portal (in work).
 

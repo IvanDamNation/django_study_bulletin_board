@@ -32,5 +32,5 @@ urlpatterns = [
          name='comment_accept'),
     path('<int:pk>/delete/',
          delete_commentary,
-         name='comment_delete')
+         name='comment_delete'),
 ]

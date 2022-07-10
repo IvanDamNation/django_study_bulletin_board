@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView
 
 from .forms import NewsForm, CommentForm
 from .models import News, Category, Comment
+from .tasks import send_author_task
 
 
 class NewsFeed(ListView):
@@ -82,6 +83,7 @@ class CommentList(ListView):
         if CommentForm.is_valid:
             messages.success(request, self.success_msg)
             comment.save()
+            send_author_task.delay(comment.news.author)
 
         return super().get(request, *args, **kwargs)
 

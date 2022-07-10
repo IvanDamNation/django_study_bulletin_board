@@ -173,3 +173,12 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 # Logging option
 
 # LOGGING = log_configuration
+
+# Cache option
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://redis:6379/0',
+    }
+}

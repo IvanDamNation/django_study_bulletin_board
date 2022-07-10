@@ -4,7 +4,7 @@ from django.urls import reverse
 from usersaccounts.models import User
 
 
-class Files(models.Model):  # TODO Don't forget add MEDIA_URL and MEDIA_ROOT
+class Files(models.Model):
     file = models.FileField()
 
 
@@ -21,9 +21,6 @@ class News(models.Model):
     photo = models.ImageField(blank=True, upload_to='photos/%Y/%m/%d', verbose_name='Photo')
     is_published = models.BooleanField(default=True, verbose_name='Published?')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Category')
-    # TODO
-    # images = models.ManyToManyField(Images)
-    # files = models.ManyToManyField(Files)
 
     def get_absolute_url(self):
         return reverse('view_news', kwargs={'pk': self.pk})

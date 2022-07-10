@@ -9,9 +9,10 @@ from django.contrib.auth.tokens import default_token_generator as token_generato
 from django.views.generic import ListView
 
 from board.models import Comment, News
-from usersaccounts.filters import CommentFilter
-from usersaccounts.forms import UserCreationForm, AuthenticationForm
-from usersaccounts.utils import send_email_for_verify
+from .tasks import send_sender_task
+from .filters import CommentFilter
+from .forms import UserCreationForm, AuthenticationForm
+from .utils import send_email_for_verify
 
 
 User = get_user_model()
@@ -113,6 +114,8 @@ def accept_commentary(request, pk):
     commentary = Comment.objects.get(pk=pk)
     commentary.accept = True
     commentary.save()
+    # send_to_sender(commentary.sender.email)
+    send_sender_task.delay(commentary.sender.email)
 
     return redirect('acceptation_list')
 

@@ -17,8 +17,8 @@
         <p class="card-text">{{ item.text }}</p>
         <p class="card-footer text-muted">{{ item.created_at|date:"Y-m-d H:i:s" }}</p>
         {% csrf_token %}
-        <a href="{% url 'comment_accept' item.pk %}" class="btn btn-primary">Accept this comment</a>
-        <a href="{% url 'comment_delete' item.pk %}" class="btn btn-danger">Delete this comment</a>
+        <a href="{% url 'comment_accept' item.pk %}" class="btn btn-primary">Accept</a>
+        <a href="{% url 'comment_delete' item.pk %}" class="btn btn-danger">Delete</a>
 
     </form>
     {% empty %}
