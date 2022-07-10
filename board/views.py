@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
@@ -45,7 +46,7 @@ class ViewNews(DetailView):
         return reverse_lazy('view_news', kwargs={'pk': self.get_object().id})
 
 
-class CreateNews(CreateView):
+class CreateNews(LoginRequiredMixin, CreateView):
     form_class = NewsForm
     template_name = 'board/add_news.html'
 
@@ -60,7 +61,7 @@ class CreateNews(CreateView):
             return self.form_invalid(form)
 
 
-class CommentList(ListView):
+class CommentList(LoginRequiredMixin, ListView):
     model = Comment
     template_name = 'board/comments_list.html'
     context_object_name = 'commentaries'
