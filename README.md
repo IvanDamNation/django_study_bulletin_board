@@ -30,8 +30,9 @@ Requirements:
 - DJANGO_PORT=*port number*
 - DOCKER_EXPOSE_PORT=*port number*
 - DJANGO_ALLOWED_HOSTS=*host list* (f.e. "127.0.0.1")
+4) properly installed docker on your machine.
 
-properly installed docker on your machine
+
 For starting server use command in project root directory:
 *docker-compose up*
 After properly started cluster of three containers (Django, Redis and Celery) you can access project web-interface on localhost address with standard port 8000 (127.0.0.1:8000).
