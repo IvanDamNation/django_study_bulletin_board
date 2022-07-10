@@ -80,11 +80,12 @@ class CommentList(LoginRequiredMixin, ListView):
         sender = self.request.user
         text = request.POST['text']
         comment = Comment(news=news, sender=sender, text=text)
+        for_send = {'email': comment.news.author.email}
 
         if CommentForm.is_valid:
             messages.success(request, self.success_msg)
             comment.save()
-            send_author_task.delay(comment.news.author)
+            send_author_task.delay(str(for_send['email']))
 
         return super().get(request, *args, **kwargs)
 

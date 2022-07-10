@@ -114,7 +114,8 @@ def accept_commentary(request, pk):
     commentary = Comment.objects.get(pk=pk)
     commentary.accept = True
     commentary.save()
-    send_sender_task.delay(commentary.sender.email)
+    for_send = {'email': commentary.sender.email}
+    send_sender_task.delay(str(for_send['email']))
 
     return redirect('acceptation_list')
 
