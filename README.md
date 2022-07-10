@@ -15,21 +15,26 @@ Features:
 6) Personal page for each account;
 7) Commentary for each news;
 8) Comment shows up after author accept;
-9) Email notification for author about new comment (in work);
+9) Email notification for author about new comment;
 10) Weekly user notification about some news on portal (in work).
 
 Requirements: 
 1) In requirements.txt file (Docker install everything automatically)(in work);
-2) Create file "keys.py" in root project directory with parameter DJANGO_KEY (put your own pre-made Django token in it)
+2) Create file "keys.py" in root project directory with parameters: 
+- DJANGO_KEY (put your own pre-made Django token in it)
+- SMTP_SERVER = *smtp.smtp_server.com*
+- MAIL_USER = *mail_login*
+- MAIL_SERVICE = *@mail_domain.com*
+- MAIL_PASSWORD = *mail_password*
 3) Create file ".env" in root project directory with parameters:
 - DJANGO_PORT=*port number*
 - DOCKER_EXPOSE_PORT=*port number*
 - DJANGO_ALLOWED_HOSTS=*host list* (f.e. "127.0.0.1")
 
-~~properly installed docker on your machine
+properly installed docker on your machine
 For starting server use command in project root directory:
 *docker-compose up*
-After properly started cluster of three containers (Django, Redis and Celery) you can access project web-interface on localhost address with standard port 8000 (127.0.0.1:8000).~~ (When docker will be ready)
+After properly started cluster of three containers (Django, Redis and Celery) you can access project web-interface on localhost address with standard port 8000 (127.0.0.1:8000).
 
 
 Made for final practice exercise in chapter "Django and backend" for SkillFactory
