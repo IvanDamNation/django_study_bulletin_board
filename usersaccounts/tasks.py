@@ -2,7 +2,7 @@ from celery import shared_task
 
 from GameNotifPortal.celery import app
 
-from .utils import send_to_sender
+from .utils import send_to_sender, send_newsletter
 
 
 @app.task
@@ -12,4 +12,4 @@ def send_sender_task(user_email):
 
 @shared_task
 def send_newsletter_every_week():
-    pass
+    send_newsletter()

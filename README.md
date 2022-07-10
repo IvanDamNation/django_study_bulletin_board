@@ -16,10 +16,10 @@ Features:
 7) Commentary for each news;
 8) Comment shows up after author accept;
 9) Email notification for author about new comment;
-10) Weekly user notification about some news on portal (in work).
+10) Weekly user notification about some news on portal.
 
 Requirements: 
-1) In requirements.txt file (Docker install everything automatically)(in work);
+1) In requirements.txt file (Docker install everything automatically);
 2) Create file "keys.py" in root project directory with parameters: 
 - DJANGO_KEY (put your own pre-made Django token in it)
 - SMTP_SERVER = *smtp.smtp_server.com*
